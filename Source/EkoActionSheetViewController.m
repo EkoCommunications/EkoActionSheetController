@@ -44,7 +44,7 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
 
 + (EkoActionSheetViewController*)instantiateFromStoryBoard
 {
-    EkoActionSheetViewController *vc = [[UIStoryboard storyboardWithName:@"EkoActionSheet" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([EkoActionSheetViewController class])];
+    EkoActionSheetViewController *vc = [[UIStoryboard storyboardWithName:@"EkoActionSheet" bundle:[NSBundle bundleForClass:[self class]]] instantiateViewControllerWithIdentifier:NSStringFromClass([EkoActionSheetViewController class])];
     vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     return vc;

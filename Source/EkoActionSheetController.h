@@ -14,8 +14,9 @@ FOUNDATION_EXPORT double EkoActionSheetControllerVersionNumber;
 //! Project version string for EkoActionSheetController.
 FOUNDATION_EXPORT const unsigned char EkoActionSheetControllerVersionString[];
 
-#import <EkoActionSheetController/EkoActionSheetPresentationTransition.h>
+#import <EkoActionSheetController/EkoActionSheetViewController.h>
 #import <EkoActionSheetController/EkoActionSheetDismissalTransition.h>
-#import <EkoActionSheetController/FXBlurPublicHeader.h>
+#import <EkoActionSheetController/EkoActionSheetPresentationTransition.h>
+//#import <FXBlur/FXBlurPublicHeader.h>
 
 
