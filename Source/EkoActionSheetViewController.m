@@ -7,13 +7,12 @@
 //
 
 #import "EkoActionSheetViewController.h"
-
+#import "EkoActionSheetPresentationTransition.h"
+#import "EkoActionSheetDismissalTransition.h"
+#import "EkoActionSheetItem.h"
+#import "EkoActionSheetCell.h"
 @import FXBlurView;
 
-@interface EkoActionSheetViewController (Actions)
-- (void)cancelButtonDidTouched:(id)sender;
-- (void)applyButtonDidTouched:(id)sender;
-@end
 
 static CGFloat const kEkoActionSheetHeaderViewHeight = 50.0f;
 static CGFloat const kEkoActionSheetCellHeight = 55.0f;
@@ -21,13 +20,9 @@ static CGFloat const kEkoActionSheetTintViewAlpha = 0.5f;
 static CGFloat const kEkoActionSheetBlurViewPresentationDuration = 0.34f;
 static CGFloat const kEkoActionSheetBlurViewDismissalDuration = 0.24f;
 static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
-static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
 
-@interface EkoActionSheetViewController (UITableView) <UITableViewDelegate, UITableViewDataSource>
-@end
+@interface EkoActionSheetViewController () <UIViewControllerTransitioningDelegate>
 
-
-@interface EkoActionSheetViewController ()
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *headerContainerView;
 @property (weak, nonatomic) IBOutlet UIView *subHeaderView;
@@ -38,9 +33,20 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightConstraint;
 @property (strong, nonatomic) FXBlurView *blurView;
 
+@property (nullable, nonatomic, strong) UIView *blurBackgroundView;
+@property (nonnull, nonatomic) NSArray<EkoActionSheetItem*> *items;
+@property (nonnull, nonatomic) UIColor *headerViewBackgroundColor;
+@property (nonnull, nonatomic) UIColor *separatorLineColor;
+@property (nonnull, nonatomic) NSString *actionSheetTitle;
+@property (nonnull, nonatomic) EkoActionSheetItem *cancelItem;
+@property (nonnull, nonatomic) EkoActionSheetItem *applyItem;
+
 @end
 
+
 @implementation EkoActionSheetViewController
+
+#pragma mark - instanitation
 
 + (EkoActionSheetViewController*)instantiateFromStoryBoard
 {
@@ -50,7 +56,133 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
     return vc;
 }
 
-#pragma mark - Getters
+#pragma mark - presentations 
+
++ (void)presentOnViewController:(nonnull UIViewController*)fromViewController
+                          items:(nonnull NSArray<EkoActionSheetItem*>*)items
+          headerBackgroundColor:(nullable UIColor*)headerBackgroundColor
+             separatorLineColor:(nullable UIColor*)separatorLineColor
+                          title:(nullable NSString*)title
+                     cancelItem:(nullable EkoActionSheetItem*)cancelItem
+                      applyItem:(nullable EkoActionSheetItem*)applyItem
+{
+    EkoActionSheetViewController *vc = [self instantiateFromStoryBoard];
+    vc.items = items;
+    vc.blurBackgroundView = fromViewController.view;
+    vc.headerViewBackgroundColor = headerBackgroundColor;
+    vc.separatorLineColor = separatorLineColor;
+    vc.actionSheetTitle = title;
+    vc.cancelItem = cancelItem;
+    vc.applyItem = applyItem;
+    [fromViewController presentViewController:vc animated:YES completion:nil];
+}
+
++ (void)presentOnViewController:(nonnull UIViewController*)fromViewController
+                          items:(nonnull NSArray<EkoActionSheetItem*>*)items
+          headerBackgroundColor:(nullable UIColor*)headerBackgroundColor
+             separatorLineColor:(nullable UIColor*)separatorLineColor
+                          title:(nullable NSString*)title
+                     cancelItem:(nullable EkoActionSheetItem*)cancelItem
+{
+    [self presentOnViewController:fromViewController items:items headerBackgroundColor:nil separatorLineColor:nil title:title cancelItem:cancelItem applyItem:nil];
+}
+
++ (void)presentOnViewController:(nonnull UIViewController*)fromViewController
+                          items:(nonnull NSArray<EkoActionSheetItem*>*)items
+                          title:(nullable NSString*)title
+                     cancelItem:(nullable EkoActionSheetItem*)cancelItem
+                      applyItem:(nullable EkoActionSheetItem*)applyItem
+{
+    [self presentOnViewController:fromViewController items:items headerBackgroundColor:nil separatorLineColor:nil title:title cancelItem:cancelItem applyItem:applyItem];
+}
+
++ (void)presentOnViewController:(nonnull UIViewController*)fromViewController
+                          items:(nonnull NSArray<EkoActionSheetItem*>*)items
+                          title:(nullable NSString*)title
+                     cancelItem:(nullable EkoActionSheetItem*)cancelItem
+{
+    [self presentOnViewController:fromViewController items:items headerBackgroundColor:nil separatorLineColor:nil title:title cancelItem:cancelItem applyItem:nil];
+}
+
+#pragma mark - lifecycle
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.transitioningDelegate = self;
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    if (self.blurBackgroundView) {
+        self.blurView.blurRadius = 10.0f;
+        [self showBlurViewOnView:self.blurBackgroundView animationDuration:kEkoActionSheetBlurViewPresentationDuration];
+    }
+    
+    [self configureView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.transitioningDelegate = nil;
+    
+    if (self.blurBackgroundView) {
+        [self removeBlurViewWithAnimationDuration:kEkoActionSheetBlurViewDismissalDuration];
+    }
+}
+
+#pragma mark - Configure View
+
+- (void)configureView
+{
+    self.containerView.layer.masksToBounds = YES;
+    self.containerView.layer.cornerRadius = kEkoActionSheetHeaderCornerRadius;
+    
+    UIColor *headerColor = self.headerViewBackgroundColor ? self.headerViewBackgroundColor : self.headerContainerView.backgroundColor;
+    self.headerContainerView.backgroundColor = headerColor;
+    self.subHeaderView.backgroundColor = headerColor;
+    
+    self.containerViewHeightConstraint.constant = [self visibleViewHeight];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.titleLabel.text = self.actionSheetTitle ? self.actionSheetTitle : NSLocalizedString(@"", nil);
+    
+    if (self.cancelItem) {
+        [self.cancelButton setTitle:self.cancelItem.title forState:UIControlStateNormal];
+        [self.cancelButton addTarget:self action:@selector(cancelItemActionHandler) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.cancelButton.hidden = YES;
+    }
+    
+    if (self.applyItem) {
+        [self.applyButton setTitle:self.applyItem.title forState:UIControlStateNormal];
+        [self.applyButton addTarget:self action:@selector(applyItemActionHandler) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.applyButton.hidden = YES;
+    }
+    
+    NSString *cellNibName = NSStringFromClass([EkoActionSheetCell class]);
+    UINib *cellNib = [UINib nibWithNibName:cellNibName bundle:[NSBundle bundleForClass:[self class]]];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellNibName];
+}
+
+- (CGFloat)visibleViewHeight
+{
+    CGFloat headerHeight = kEkoActionSheetHeaderViewHeight;
+    CGFloat cellHeight = kEkoActionSheetCellHeight;
+    NSUInteger cellCount = self.items.count;
+    CGFloat paddingBottom = 0;
+    return ceilf(headerHeight + cellHeight * cellCount + paddingBottom);
+}
+
+#pragma mark - Blur View
 
 - (FXBlurView *)blurView
 {
@@ -74,20 +206,6 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
     return _blurView;
 }
 
-#pragma mark - setters
-
-- (void)setCancelButtonHidden:(BOOL)cancelButtonHidden
-{
-    _cancelButtonHidden = cancelButtonHidden;
-    _cancelButton.hidden = cancelButtonHidden;
-}
-
-- (void)setApplyButtonHidden:(BOOL)applyButtonHidden
-{
-    _applyButtonHidden = applyButtonHidden;
-    _applyButton.hidden = applyButtonHidden;
-}
-
 - (void)showBlurViewOnView:(UIView*)view animationDuration:(CGFloat)animationDuration
 {
     self.blurView.alpha = 0.0f;
@@ -98,7 +216,6 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
     } completion:nil];
 }
 
-
 - (void)removeBlurViewWithAnimationDuration:(CGFloat)animationDuration
 {
     [UIView animateWithDuration:animationDuration animations:^{
@@ -108,102 +225,39 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
     }];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
+#pragma mark - Actions
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)cancelItemActionHandler
 {
-    [super viewWillAppear:animated];
-    
-    if (self.blurBackgroundView) {
-        self.blurView.blurRadius = 10.0f;
-        [self showBlurViewOnView:self.blurBackgroundView animationDuration:kEkoActionSheetBlurViewPresentationDuration];
+    if (self.cancelItem.handler) {
+        __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
+        self.cancelItem.handler(weakItem);
     }
     
-    [self configureView];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)applyItemActionHandler
 {
-    [super viewWillDisappear:animated];
-    
-    if (self.blurBackgroundView) {
-        [self removeBlurViewWithAnimationDuration:kEkoActionSheetBlurViewDismissalDuration];
-    }
-}
-
-#pragma mark - Configure View
-
-- (void)configureView
-{
-    self.containerView.layer.masksToBounds = YES;
-    self.containerView.layer.cornerRadius = kEkoActionSheetHeaderCornerRadius;
-    
-    UIColor *headerColor = self.headerViewBackgroundColor ? self.headerViewBackgroundColor : self.headerContainerView.backgroundColor;
-    self.headerContainerView.backgroundColor = headerColor;
-    self.subHeaderView.backgroundColor = headerColor;
-    
-    self.containerViewHeightConstraint.constant = [self visibleViewHeight];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    UIColor *buttonTitleColor = [self.applyButton titleColorForState:UIControlStateNormal];
-    [self.applyButton setTitleColor:[buttonTitleColor colorWithAlphaComponent:kEkoActionSheetButtonAlpha] forState:UIControlStateDisabled];
-    
-    self.titleLabel.text = self.actionSheetTitle ? self.actionSheetTitle : NSLocalizedString(@"", nil);
-
-    NSString *cancelTitle = self.cancelButtonTitle ? self.cancelButtonTitle : NSLocalizedString(@"Cancel", nil);
-    [self.cancelButton setTitle:cancelTitle forState:UIControlStateNormal];
-    [self.cancelButton addTarget:self action:@selector(cancelButtonDidTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelButton.hidden = self.cancelButtonHidden;
-    
-    NSString *applyTitle = self.applyButtonTitle ? self.applyButtonTitle : NSLocalizedString(@"Apply", nil);
-    [self.applyButton setTitle:applyTitle forState:UIControlStateNormal];
-    [self.applyButton addTarget:self action:@selector(applyButtonDidTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.applyButton.hidden = self.applyButtonHidden;
-}
-
-- (CGFloat)visibleViewHeight
-{
-    CGFloat headerHeight = kEkoActionSheetHeaderViewHeight;
-    CGFloat cellHeight = kEkoActionSheetCellHeight;
-    NSUInteger cellCount = self.dataSource.numberOfActions;
-    CGFloat paddingBottom = 0;
-    if ([self.dataSource respondsToSelector:@selector(actionSheetPaddingBottom)]) {
-        paddingBottom = [self.dataSource actionSheetPaddingBottom];
+    if (self.applyItem.handler) {
+        __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
+        self.applyItem.handler(weakItem);
     }
     
-    return ceilf(headerHeight + cellHeight * cellCount + paddingBottom);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-@end
-
-@implementation EkoActionSheetViewController (Actions)
-
-#pragma mark - UITapGesture action
-
-- (IBAction)dismissFilteringInterface:(id)sender {
-    [self cancelButtonDidTouched:self.cancelButton];
-}
-
-- (void)cancelButtonDidTouched:(id)sender
+- (IBAction)dismissFilteringInterface:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(didTouchedCancelButton)]) {
-        [self.delegate didTouchedCancelButton];
+    if (self.cancelItem.handler) {
+        __weak typeof(EkoActionSheetItem) *weakItem = self.cancelItem;
+        self.cancelItem.handler(weakItem);
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)applyButtonDidTouched:(id)sender
-{
-    if ([self.delegate respondsToSelector:@selector(didTouchedApplyButton)]) {
-        [self.delegate didTouchedApplyButton];
-    }
-}
-
-@end
-
-@implementation EkoActionSheetViewController (UITableView)
+#pragma mark - table view datasource & delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -212,20 +266,58 @@ static CGFloat const kEkoActionSheetButtonAlpha = 0.6f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.numberOfActions;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.dataSource cellForActionForTableView:tableView atIndexPath:indexPath];
+    NSString *reuseIdentifier = NSStringFromClass([EkoActionSheetCell class]);
+    EkoActionSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+
+    EkoActionSheetItem *item = self.items[indexPath.row];
+    cell.actionImage = item.image;
+    cell.title = item.title;
+    cell.subtitle = item.subtitle;
+    
+    if (self.separatorLineColor) {
+        cell.separatorLineColor = self.separatorLineColor;
+    }
+    
+    // hide separator line for the last cell
+    cell.separatorLineHidden = indexPath.row == self.items.count - 1;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.delegate respondsToSelector:@selector(didSelectedActionCell:atIndexPath:)]) {
-        UITableViewCell *cell = [self.dataSource cellForActionForTableView:tableView atIndexPath:indexPath];
-        [self.delegate didSelectedActionCell:cell atIndexPath:indexPath];
+    EkoActionSheetItem *item = self.items[indexPath.row];
+    if (item.handler) {
+        __weak typeof(EkoActionSheetItem) *weakItem = item;
+        item.handler(weakItem);
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // http://openradar.appspot.com/19563577
+    // http://stackoverflow.com/a/30787046/1994889
+    CFRunLoopWakeUp(CFRunLoopGetCurrent());
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
+{
+    return [[EkoActionSheetPresentationTransition alloc] init];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [[EkoActionSheetDismissalTransition alloc] init];
 }
 
 @end

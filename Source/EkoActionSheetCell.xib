@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="EkoActionSheetCell" selectionStyle="default" indentationWidth="10" id="ufB-Nn-znU" customClass="EkoActionSheetCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ufB-Nn-znU" id="5bo-0O-Prj">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EPL-ht-3nz">
+                        <rect key="frame" x="15" y="22" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="56s-K7-DOF"/>
+                            <constraint firstAttribute="height" constant="20" id="fkp-Yd-NEU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-D0-c9d">
+                        <rect key="frame" x="50" y="14" width="311" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="4lA-ng-aKF">
+                        <rect key="frame" x="50" y="35" width="310" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e13-IO-VyR" userLabel="Separator Line View">
+                        <rect key="frame" x="0.0" y="63.5" width="375" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="p5z-st-bSY"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4lA-ng-aKF" firstAttribute="centerY" secondItem="5bo-0O-Prj" secondAttribute="centerY" constant="12" id="76K-yt-EjU"/>
+                    <constraint firstItem="EPL-ht-3nz" firstAttribute="centerY" secondItem="5bo-0O-Prj" secondAttribute="centerY" id="GCr-7j-Jea"/>
+                    <constraint firstAttribute="trailing" secondItem="e13-IO-VyR" secondAttribute="trailing" id="Kso-8i-EDB"/>
+                    <constraint firstItem="e13-IO-VyR" firstAttribute="leading" secondItem="5bo-0O-Prj" secondAttribute="leading" id="Mmm-jl-rwG"/>
+                    <constraint firstAttribute="trailing" secondItem="ZP2-D0-c9d" secondAttribute="trailing" constant="14" id="Pbz-7H-gUS"/>
+                    <constraint firstItem="ZP2-D0-c9d" firstAttribute="leading" secondItem="5bo-0O-Prj" secondAttribute="leading" constant="50" id="Qdm-NA-Xtd"/>
+                    <constraint firstItem="ZP2-D0-c9d" firstAttribute="centerY" secondItem="5bo-0O-Prj" secondAttribute="centerY" constant="-8" id="StZ-PV-Oii"/>
+                    <constraint firstAttribute="trailing" secondItem="4lA-ng-aKF" secondAttribute="trailing" constant="15" id="cg8-pU-utg"/>
+                    <constraint firstAttribute="bottom" secondItem="e13-IO-VyR" secondAttribute="bottom" id="d1D-ZR-jfd"/>
+                    <constraint firstItem="4lA-ng-aKF" firstAttribute="leading" secondItem="5bo-0O-Prj" secondAttribute="leading" constant="50" id="icX-Bs-KaS"/>
+                    <constraint firstItem="EPL-ht-3nz" firstAttribute="leading" secondItem="5bo-0O-Prj" secondAttribute="leading" constant="15" id="ilJ-Ul-Znc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="actionImageView" destination="EPL-ht-3nz" id="kxm-0G-M4Z"/>
+                <outlet property="separatorLineHeightConstraint" destination="p5z-st-bSY" id="5NU-gS-qeg"/>
+                <outlet property="separatorLineView" destination="e13-IO-VyR" id="wEm-VG-rGG"/>
+                <outlet property="subtitleLabel" destination="4lA-ng-aKF" id="eHZ-gN-OZg"/>
+                <outlet property="subtitleLabelCenterYConstraint" destination="76K-yt-EjU" id="H0X-2e-FQw"/>
+                <outlet property="subtitleLableLeadingConstraint" destination="icX-Bs-KaS" id="QMx-EI-EMp"/>
+                <outlet property="titleLabel" destination="ZP2-D0-c9d" id="yWR-5D-OLW"/>
+                <outlet property="titleLabelCenterYConstraint" destination="StZ-PV-Oii" id="Udx-S5-bM2"/>
+                <outlet property="titleLableLeadingConstraint" destination="Qdm-NA-Xtd" id="l8I-8q-PUC"/>
+            </connections>
+            <point key="canvasLocation" x="-119.5" y="-80.5"/>
+        </tableViewCell>
+    </objects>
+</document>

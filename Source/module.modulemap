@@ -1,6 +1,12 @@
 framework module EkoActionSheetController {
-    umbrella header "FXBlurPublicHeader.h"
+    umbrella header "EkoActionSheetController.h"
     
     export *
     module * { export * }
+    
+    explicit module FXBlurView {
+        header "FXBlurPublicHeader.h"
+        link "FXBlurView"
+        export *
+    }
 }

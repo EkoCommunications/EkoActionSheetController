@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F0045B491DE6C61B00FAD01A /* FXBlurView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0045B481DE6C61B00FAD01A /* FXBlurView.framework */; };
-		F0F20AFA1D4F131C0077F1BE /* EkoActionSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F0F20B041D4F138A0077F1BE /* EkoActionSheetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFE1D4F138A0077F1BE /* EkoActionSheetConstants.h */; };
-		F0F20B051D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFF1D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0045B4F1DE6DD3D00FAD01A /* EkoActionSheetItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F0045B4D1DE6DD3D00FAD01A /* EkoActionSheetItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0045B501DE6DD3D00FAD01A /* EkoActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F0045B4E1DE6DD3D00FAD01A /* EkoActionSheetItem.m */; };
+		F0045B541DE6F25B00FAD01A /* EkoActionSheetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F0045B511DE6F25B00FAD01A /* EkoActionSheetCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F0045B551DE6F25B00FAD01A /* EkoActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0045B521DE6F25B00FAD01A /* EkoActionSheetCell.m */; };
+		F0045B561DE6F25B00FAD01A /* EkoActionSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0045B531DE6F25B00FAD01A /* EkoActionSheetCell.xib */; };
+		F0045B7E1DE7119000FAD01A /* EkoActionSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0045B801DE7189800FAD01A /* FXBlurView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0045B7F1DE7189800FAD01A /* FXBlurView.framework */; };
+		F0F20B041D4F138A0077F1BE /* EkoActionSheetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFE1D4F138A0077F1BE /* EkoActionSheetConstants.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F0F20B051D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFF1D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F0F20B061D4F138A0077F1BE /* EkoActionSheetDismissalTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B001D4F138A0077F1BE /* EkoActionSheetDismissalTransition.m */; };
-		F0F20B071D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20B011D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0F20B071D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20B011D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F0F20B081D4F138A0077F1BE /* EkoActionSheetPresentationTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B021D4F138A0077F1BE /* EkoActionSheetPresentationTransition.m */; };
 		F0F20B0B1D4F14100077F1BE /* EkoActionSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20B091D4F14100077F1BE /* EkoActionSheetViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0F20B0C1D4F14100077F1BE /* EkoActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B0A1D4F14100077F1BE /* EkoActionSheetViewController.m */; };
@@ -20,7 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F0045B481DE6C61B00FAD01A /* FXBlurView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FXBlurView.framework; path = Carthage/Build/iOS/FXBlurView.framework; sourceTree = SOURCE_ROOT; };
+		F0045B4D1DE6DD3D00FAD01A /* EkoActionSheetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetItem.h; sourceTree = "<group>"; };
+		F0045B4E1DE6DD3D00FAD01A /* EkoActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EkoActionSheetItem.m; sourceTree = "<group>"; };
+		F0045B511DE6F25B00FAD01A /* EkoActionSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetCell.h; sourceTree = "<group>"; };
+		F0045B521DE6F25B00FAD01A /* EkoActionSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EkoActionSheetCell.m; sourceTree = "<group>"; };
+		F0045B531DE6F25B00FAD01A /* EkoActionSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EkoActionSheetCell.xib; sourceTree = "<group>"; };
+		F0045B7F1DE7189800FAD01A /* FXBlurView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FXBlurView.framework; path = Carthage/Build/iOS/FXBlurView.framework; sourceTree = SOURCE_ROOT; };
 		F0F20AEF1D4F12D50077F1BE /* EkoActionSheetController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EkoActionSheetController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetController.h; sourceTree = "<group>"; };
 		F0F20AF91D4F131C0077F1BE /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
@@ -39,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0045B491DE6C61B00FAD01A /* FXBlurView.framework in Frameworks */,
+				F0045B801DE7189800FAD01A /* FXBlurView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,7 +59,7 @@
 		F0045B471DE6C60000FAD01A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0045B481DE6C61B00FAD01A /* FXBlurView.framework */,
+				F0045B7F1DE7189800FAD01A /* FXBlurView.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -76,6 +86,11 @@
 			children = (
 				F0F20B091D4F14100077F1BE /* EkoActionSheetViewController.h */,
 				F0F20B0A1D4F14100077F1BE /* EkoActionSheetViewController.m */,
+				F0045B4D1DE6DD3D00FAD01A /* EkoActionSheetItem.h */,
+				F0045B4E1DE6DD3D00FAD01A /* EkoActionSheetItem.m */,
+				F0045B511DE6F25B00FAD01A /* EkoActionSheetCell.h */,
+				F0045B521DE6F25B00FAD01A /* EkoActionSheetCell.m */,
+				F0045B531DE6F25B00FAD01A /* EkoActionSheetCell.xib */,
 				F0F20B0D1D4F14350077F1BE /* EkoActionSheet.storyboard */,
 				F0F20AFC1D4F138A0077F1BE /* Transitioning */,
 				F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */,
@@ -103,11 +118,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0F20B041D4F138A0077F1BE /* EkoActionSheetConstants.h in Headers */,
-				F0F20B071D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h in Headers */,
-				F0F20AFA1D4F131C0077F1BE /* EkoActionSheetController.h in Headers */,
-				F0F20B051D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h in Headers */,
+				F0045B7E1DE7119000FAD01A /* EkoActionSheetController.h in Headers */,
 				F0F20B0B1D4F14100077F1BE /* EkoActionSheetViewController.h in Headers */,
+				F0045B4F1DE6DD3D00FAD01A /* EkoActionSheetItem.h in Headers */,
+				F0F20B071D4F138A0077F1BE /* EkoActionSheetPresentationTransition.h in Headers */,
+				F0F20B051D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h in Headers */,
+				F0045B541DE6F25B00FAD01A /* EkoActionSheetCell.h in Headers */,
+				F0F20B041D4F138A0077F1BE /* EkoActionSheetConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0F20B0E1D4F14350077F1BE /* EkoActionSheet.storyboard in Resources */,
+				F0045B561DE6F25B00FAD01A /* EkoActionSheetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0045B501DE6DD3D00FAD01A /* EkoActionSheetItem.m in Sources */,
 				F0F20B0C1D4F14100077F1BE /* EkoActionSheetViewController.m in Sources */,
+				F0045B551DE6F25B00FAD01A /* EkoActionSheetCell.m in Sources */,
 				F0F20B081D4F138A0077F1BE /* EkoActionSheetPresentationTransition.m in Sources */,
 				F0F20B061D4F138A0077F1BE /* EkoActionSheetDismissalTransition.m in Sources */,
 			);
@@ -280,6 +300,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -303,8 +324,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Source/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ekocommunications.EkoActionSheetControlleriOS;
@@ -343,6 +365,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -360,8 +383,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Source/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ekocommunications.EkoActionSheetControlleriOS;
 				PRODUCT_NAME = EkoActionSheetController;
