@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "EkoActionSheetController/EkoActionSheetController.h"
+@import EkoActionSheetController;
 
 @interface ViewController () <EkoActionSheetDataSource, EkoActionSheetDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *actionLabel;

@@ -12,7 +12,6 @@
 		F0F20B5C1D4F1E6A0077F1BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F20B5B1D4F1E6A0077F1BE /* Assets.xcassets */; };
 		F0F20B5F1D4F1E6A0077F1BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20B5D1D4F1E6A0077F1BE /* LaunchScreen.storyboard */; };
 		F0F20B711D4F1ED60077F1BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B6D1D4F1ED60077F1BE /* ViewController.m */; };
-		F0F20B721D4F1ED60077F1BE /* EkoActionSheetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B6F1D4F1ED60077F1BE /* EkoActionSheetAction.m */; };
 		F0F20B731D4F1ED60077F1BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20B701D4F1ED60077F1BE /* Main.storyboard */; };
 		F0F20B7A1D4F2A530077F1BE /* EkoActionSheetController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F20B791D4F29A50077F1BE /* EkoActionSheetController.framework */; };
 /* End PBXBuildFile section */
@@ -37,8 +36,6 @@
 		F0F20B601D4F1E6A0077F1BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0F20B6C1D4F1ED60077F1BE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F0F20B6D1D4F1ED60077F1BE /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F0F20B6E1D4F1ED60077F1BE /* EkoActionSheetAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetAction.h; sourceTree = "<group>"; };
-		F0F20B6F1D4F1ED60077F1BE /* EkoActionSheetAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EkoActionSheetAction.m; sourceTree = "<group>"; };
 		F0F20B701D4F1ED60077F1BE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F0F20B741D4F29A50077F1BE /* EkoActionSheetController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EkoActionSheetController.xcodeproj; path = ../EkoActionSheetController.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,8 +76,6 @@
 				F0F20B531D4F1E6A0077F1BE /* AppDelegate.m */,
 				F0F20B6C1D4F1ED60077F1BE /* ViewController.h */,
 				F0F20B6D1D4F1ED60077F1BE /* ViewController.m */,
-				F0F20B6E1D4F1ED60077F1BE /* EkoActionSheetAction.h */,
-				F0F20B6F1D4F1ED60077F1BE /* EkoActionSheetAction.m */,
 				F0F20B701D4F1ED60077F1BE /* Main.storyboard */,
 				F0F20B5B1D4F1E6A0077F1BE /* Assets.xcassets */,
 				F0F20B5D1D4F1E6A0077F1BE /* LaunchScreen.storyboard */,
@@ -193,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0F20B711D4F1ED60077F1BE /* ViewController.m in Sources */,
-				F0F20B721D4F1ED60077F1BE /* EkoActionSheetAction.m in Sources */,
 				F0F20B541D4F1E6A0077F1BE /* AppDelegate.m in Sources */,
 				F0F20B511D4F1E6A0077F1BE /* main.m in Sources */,
 			);

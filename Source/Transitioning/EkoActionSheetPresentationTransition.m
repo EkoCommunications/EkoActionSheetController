@@ -9,11 +9,12 @@
 #import "EkoActionSheetPresentationTransition.h"
 #import "EkoActionSheetConstants.h"
 
+
 @implementation EkoActionSheetPresentationTransition
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return kFormFilteringTransitionDuration;
+    return kEkoActionSheetPresentationTransitionDuration;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -32,8 +33,8 @@
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                           delay:0.0f
-         usingSpringWithDamping:kFormFilteringPresentationSpringDamping
-          initialSpringVelocity:kFormFilteringPresentationSpringVelocity
+         usingSpringWithDamping:kEkoActionSheetPresentationSpringDamping
+          initialSpringVelocity:kEkoActionSheetPresentationSpringVelocity
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          toVC.view.frame = finalFrame;

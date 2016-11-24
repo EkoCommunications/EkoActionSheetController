@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0045B491DE6C61B00FAD01A /* FXBlurView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0045B481DE6C61B00FAD01A /* FXBlurView.framework */; };
 		F0F20AFA1D4F131C0077F1BE /* EkoActionSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0F20B041D4F138A0077F1BE /* EkoActionSheetConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFE1D4F138A0077F1BE /* EkoActionSheetConstants.h */; };
 		F0F20B051D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20AFF1D4F138A0077F1BE /* EkoActionSheetDismissalTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,10 +17,10 @@
 		F0F20B0B1D4F14100077F1BE /* EkoActionSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0F20B091D4F14100077F1BE /* EkoActionSheetViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0F20B0C1D4F14100077F1BE /* EkoActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B0A1D4F14100077F1BE /* EkoActionSheetViewController.m */; };
 		F0F20B0E1D4F14350077F1BE /* EkoActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F20B0D1D4F14350077F1BE /* EkoActionSheet.storyboard */; };
-		F0F20B141D4F15020077F1BE /* FXBlurView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F20B131D4F15020077F1BE /* FXBlurView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F0045B481DE6C61B00FAD01A /* FXBlurView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FXBlurView.framework; path = Carthage/Build/iOS/FXBlurView.framework; sourceTree = SOURCE_ROOT; };
 		F0F20AEF1D4F12D50077F1BE /* EkoActionSheetController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EkoActionSheetController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F20AF81D4F131C0077F1BE /* EkoActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetController.h; sourceTree = "<group>"; };
 		F0F20AF91D4F131C0077F1BE /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
@@ -31,7 +32,6 @@
 		F0F20B091D4F14100077F1BE /* EkoActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EkoActionSheetViewController.h; sourceTree = "<group>"; };
 		F0F20B0A1D4F14100077F1BE /* EkoActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EkoActionSheetViewController.m; sourceTree = "<group>"; };
 		F0F20B0D1D4F14350077F1BE /* EkoActionSheet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EkoActionSheet.storyboard; sourceTree = "<group>"; };
-		F0F20B131D4F15020077F1BE /* FXBlurView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FXBlurView.framework; path = Carthage/Build/iOS/FXBlurView.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,18 +39,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0F20B141D4F15020077F1BE /* FXBlurView.framework in Frameworks */,
+				F0045B491DE6C61B00FAD01A /* FXBlurView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F0045B471DE6C60000FAD01A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0045B481DE6C61B00FAD01A /* FXBlurView.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		F0F20AC81D4F12260077F1BE = {
 			isa = PBXGroup;
 			children = (
 				F0F20AF71D4F13130077F1BE /* Source */,
-				F0F20B0F1D4F14D20077F1BE /* Frameworks */,
+				F0045B471DE6C60000FAD01A /* Frameworks */,
 				F0F20AD51D4F12350077F1BE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,14 +94,6 @@
 				F0F20B021D4F138A0077F1BE /* EkoActionSheetPresentationTransition.m */,
 			);
 			path = Transitioning;
-			sourceTree = "<group>";
-		};
-		F0F20B0F1D4F14D20077F1BE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F0F20B131D4F15020077F1BE /* FXBlurView.framework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +139,7 @@
 		F0F20AC91D4F12260077F1BE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				TargetAttributes = {
 					F0F20AEE1D4F12D50077F1BE = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -209,12 +209,48 @@
 		F0F20ACD1D4F12260077F1BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		F0F20ACE1D4F12260077F1BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Release;
 		};
@@ -236,7 +272,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -299,7 +335,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -357,6 +393,7 @@
 				F0F20AF61D4F12D50077F1BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

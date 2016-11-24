@@ -13,22 +13,33 @@
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return kFormFilteringTransitionDuration;
+    return kEkoActionSheetDimsissalTransitionDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
-    CGPoint finalCenter = CGPointMake(0.0f, (fromVC.view.bounds.size.height / 2) + kFormFilteringDismissalViewOffset);
+    CGRect frame1 = fromVC.view.frame;
+    frame1.origin.y -= kEkoActionSheetDismissalAnimationOneOffsetTop;
     
-    [UIView animateWithDuration:[self transitionDuration:transitionContext]
+    [UIView animateWithDuration:kEkoActionSheetDismissalAnimationOneDuration
                           delay:0.0f
-         usingSpringWithDamping:kFormFilteringDismissalSpringDamping
-          initialSpringVelocity:kFormFilteringDismissalSpringVelocity
-                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionAllowAnimatedContent
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         fromVC.view.center = finalCenter;
+                         fromVC.view.frame = frame1;
+                     } completion:nil];
+    
+    CGRect frame2 = fromVC.view.frame;
+    frame2.origin.y += frame2.size.height + kEkoActionSheetDismissalAnimationOneOffsetTop;
+    
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] - kEkoActionSheetDismissalAnimationOneDuration
+                          delay:kEkoActionSheetDismissalAnimationOneDuration
+         usingSpringWithDamping:kEkoActionSheetDismissalSpringDamping
+          initialSpringVelocity:kEkoActionSheetDismissalSpringVelocity
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent
+                     animations:^{
+                         fromVC.view.frame = frame2;
                      } completion:^(BOOL finished) {
                          [fromVC.view removeFromSuperview];
                          [transitionContext completeTransition:YES];
