@@ -13,6 +13,10 @@
 @property (nonatomic, nonnull, strong, readwrite) NSString *title;
 @property (nonatomic, nullable, strong, readwrite) NSString *subtitle;
 @property (nonatomic, assign, readwrite) EkoActionSheetItemType itemType;
+
+@property (nonatomic, nullable, strong, readwrite) NSString *cellNibName;
+@property (nonatomic, nullable, strong, readwrite) NSString *cellIdentifier;
+
 @end
 
 
@@ -77,6 +81,23 @@
                                  image:image
                                handler:handler
                               itemType:EkoActionSheetItemRegular];
+}
+
+- (nonnull instancetype)initWithCellNibName:(nonnull NSString*)cellNibName
+                             cellIdentifier:(nonnull NSString*)identifier
+                                 cellHeight:(nullable EkoActionSheetCustomCellHeightBlock)heightBlock
+                              configureCell:(nonnull EkoActionSheetCustomCellConfigureBlock)configureCellBlock
+                       didSelectCellHandler:(nullable EkoActionSheetCustomCellDidSelectCellBlock)didSelectCellHandler
+{
+    self = [super init];
+    if (self) {
+        _cellNibName = cellNibName;
+        _cellIdentifier = identifier;
+        _heightBlock = heightBlock;
+        _cellConfigureBlock = configureCellBlock;
+        _didSelectCellHandler = didSelectCellHandler;
+    }
+    return self;
 }
 
 + (instancetype)cancelItemWithTitle:(nonnull NSString*)title

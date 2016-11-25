@@ -21,7 +21,7 @@ static CGFloat const kEkoActionSheetBlurViewPresentationDuration = 0.34f;
 static CGFloat const kEkoActionSheetBlurViewDismissalDuration = 0.24f;
 static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
 
-@interface EkoActionSheetViewController () <UIViewControllerTransitioningDelegate>
+@interface EkoActionSheetViewController () <UIViewControllerTransitioningDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *headerContainerView;
@@ -171,15 +171,30 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
     NSString *cellNibName = NSStringFromClass([EkoActionSheetCell class]);
     UINib *cellNib = [UINib nibWithNibName:cellNibName bundle:[NSBundle bundleForClass:[self class]]];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellNibName];
+    
+    for (EkoActionSheetItem *item in self.items) {
+        if (item.cellNibName && item.cellIdentifier) {
+            UINib *customCellNib = [UINib nibWithNibName:item.cellIdentifier bundle:nil];
+            [self.tableView registerNib:customCellNib forCellReuseIdentifier:item.cellIdentifier];
+        }
+    }
 }
 
 - (CGFloat)visibleViewHeight
 {
     CGFloat headerHeight = kEkoActionSheetHeaderViewHeight;
-    CGFloat cellHeight = kEkoActionSheetCellHeight;
-    NSUInteger cellCount = self.items.count;
-    CGFloat paddingBottom = 0;
-    return ceilf(headerHeight + cellHeight * cellCount + paddingBottom);
+    CGFloat rowHeight = kEkoActionSheetCellHeight;
+    
+    CGFloat tableHeight = 0;
+    for (EkoActionSheetItem *item in self.items) {
+        if (item.heightBlock) {
+            tableHeight += item.heightBlock();
+        } else {
+            tableHeight += rowHeight;
+        }
+    }
+    
+    return ceilf(headerHeight + tableHeight);
 }
 
 #pragma mark - Blur View
@@ -231,29 +246,20 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
 {
     if (self.cancelItem.handler) {
         __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
-        self.cancelItem.handler(weakItem);
+        self.cancelItem.handler(weakItem, self);
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)applyItemActionHandler
 {
     if (self.applyItem.handler) {
         __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
-        self.applyItem.handler(weakItem);
+        self.applyItem.handler(weakItem, self);
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)dismissFilteringInterface:(id)sender
 {
-    if (self.cancelItem.handler) {
-        __weak typeof(EkoActionSheetItem) *weakItem = self.cancelItem;
-        self.cancelItem.handler(weakItem);
-    }
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -269,37 +275,51 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
     return self.items.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    EkoActionSheetItem *item = self.items[indexPath.row];
+    if (item.heightBlock) {
+        return item.heightBlock();
+    } else {
+        return kEkoActionSheetCellHeight;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseIdentifier = NSStringFromClass([EkoActionSheetCell class]);
-    EkoActionSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-
     EkoActionSheetItem *item = self.items[indexPath.row];
-    cell.actionImage = item.image;
-    cell.title = item.title;
-    cell.subtitle = item.subtitle;
     
-    if (self.separatorLineColor) {
-        cell.separatorLineColor = self.separatorLineColor;
+    if (item.cellNibName && item.cellIdentifier && item.cellConfigureBlock) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:item.cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return item.cellConfigureBlock(cell);
+    } else {
+        NSString *reuseIdentifier = NSStringFromClass([EkoActionSheetCell class]);
+        
+        EkoActionSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        cell.actionImage = item.image;
+        cell.title = item.title;
+        cell.subtitle = item.subtitle;
+        if (self.separatorLineColor) {
+            cell.separatorLineColor = self.separatorLineColor;
+        }
+        
+        // hide separator line for the last cell
+        cell.separatorLineHidden = indexPath.row == self.items.count - 1;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
-    
-    // hide separator line for the last cell
-    cell.separatorLineHidden = indexPath.row == self.items.count - 1;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EkoActionSheetItem *item = self.items[indexPath.row];
-    if (item.handler) {
+    if (item.didSelectCellHandler) {
+        item.didSelectCellHandler([tableView cellForRowAtIndexPath:indexPath], item, self);
+    } else if (item.handler) {
         __weak typeof(EkoActionSheetItem) *weakItem = item;
-        item.handler(weakItem);
+        item.handler(weakItem, self);
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     // http://openradar.appspot.com/19563577
     // http://stackoverflow.com/a/30787046/1994889

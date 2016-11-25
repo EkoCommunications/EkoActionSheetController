@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0CC2C591DE8190300897A5E /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0CC2C571DE8190300897A5E /* CustomCell.m */; };
+		F0CC2C5A1DE8190300897A5E /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0CC2C581DE8190300897A5E /* CustomCell.xib */; };
 		F0F20B511D4F1E6A0077F1BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B501D4F1E6A0077F1BE /* main.m */; };
 		F0F20B541D4F1E6A0077F1BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F20B531D4F1E6A0077F1BE /* AppDelegate.m */; };
 		F0F20B5C1D4F1E6A0077F1BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F20B5B1D4F1E6A0077F1BE /* Assets.xcassets */; };
@@ -27,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F0CC2C561DE8190300897A5E /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		F0CC2C571DE8190300897A5E /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		F0CC2C581DE8190300897A5E /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		F0F20B4C1D4F1E6A0077F1BE /* EkoActionSheet Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EkoActionSheet Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F20B501D4F1E6A0077F1BE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F0F20B521D4F1E6A0077F1BE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +81,9 @@
 				F0F20B531D4F1E6A0077F1BE /* AppDelegate.m */,
 				F0F20B6C1D4F1ED60077F1BE /* ViewController.h */,
 				F0F20B6D1D4F1ED60077F1BE /* ViewController.m */,
+				F0CC2C561DE8190300897A5E /* CustomCell.h */,
+				F0CC2C571DE8190300897A5E /* CustomCell.m */,
+				F0CC2C581DE8190300897A5E /* CustomCell.xib */,
 				F0F20B701D4F1ED60077F1BE /* Main.storyboard */,
 				F0F20B5B1D4F1E6A0077F1BE /* Assets.xcassets */,
 				F0F20B5D1D4F1E6A0077F1BE /* LaunchScreen.storyboard */,
@@ -176,6 +184,7 @@
 			files = (
 				F0F20B731D4F1ED60077F1BE /* Main.storyboard in Resources */,
 				F0F20B5F1D4F1E6A0077F1BE /* LaunchScreen.storyboard in Resources */,
+				F0CC2C5A1DE8190300897A5E /* CustomCell.xib in Resources */,
 				F0F20B5C1D4F1E6A0077F1BE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +198,7 @@
 			files = (
 				F0F20B711D4F1ED60077F1BE /* ViewController.m in Sources */,
 				F0F20B541D4F1E6A0077F1BE /* AppDelegate.m in Sources */,
+				F0CC2C591DE8190300897A5E /* CustomCell.m in Sources */,
 				F0F20B511D4F1E6A0077F1BE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
