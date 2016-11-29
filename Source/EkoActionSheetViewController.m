@@ -244,18 +244,20 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
 
 - (void)cancelItemActionHandler
 {
-    if (self.cancelItem.handler) {
-        __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
-        self.cancelItem.handler(weakItem, self);
+    if (self.cancelItem.cancelHandler) {
+        __weak typeof(EkoActionSheetItem) *weakItem = self.cancelItem;
+        self.cancelItem.cancelHandler(weakItem);
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)applyItemActionHandler
 {
-    if (self.applyItem.handler) {
+    if (self.applyItem.applyHandler) {
         __weak typeof(EkoActionSheetItem) *weakItem = self.applyItem;
-        self.applyItem.handler(weakItem, self);
+        self.applyItem.applyHandler(weakItem);
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)dismissFilteringInterface:(id)sender

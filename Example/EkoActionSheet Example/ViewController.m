@@ -26,7 +26,7 @@
 
 - (IBAction)presentActionSheet:(id)sender
 {
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     void (^itemActionHandler)(NSString*, UIImage *image, UIViewController *vc) = ^(NSString *title, UIImage *image, UIViewController *vc) {
         NSLog(@"did selected item: %@", title);
         weakSelf.actionLabel.text = title;
@@ -62,9 +62,8 @@
                                  }];
     
     EkoActionSheetItem *cancelItem = [EkoActionSheetItem cancelItemWithTitle:@"Cancel"
-                                                                     handler:^(EkoActionSheetItem * _Nonnull item, UIViewController * _Nonnull actionSheetViewController)
+                                                                     handler:^(EkoActionSheetItem * _Nonnull item)
                                       {
-                                          [actionSheetViewController dismissViewControllerAnimated:YES completion:nil];
                                           NSLog(@"did received cancel action");
                                       }];
     
@@ -83,9 +82,8 @@
                                                                           }];
     
     EkoActionSheetItem *applyItem = [EkoActionSheetItem applyItemWithTitle:@"Apply"
-                                                                   handler:^(EkoActionSheetItem * _Nonnull item, UIViewController * _Nonnull actionSheetViewController)
+                                                                   handler:^(EkoActionSheetItem * _Nonnull item)
                                      {
-                                         [actionSheetViewController dismissViewControllerAnimated:YES completion:nil];
                                          NSLog(@"did touch apply button");
                                      }];
     

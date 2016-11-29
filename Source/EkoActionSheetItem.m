@@ -100,24 +100,29 @@
     return self;
 }
 
-+ (instancetype)cancelItemWithTitle:(nonnull NSString*)title
-                            handler:(nullable EkoActionSheetItemHandler)handler
++ (instancetype)cancelItemWithTitle:(NSString *)title
+                            handler:(EkoActionSheetCancelItemHandler)cancelHandler
 {
-    return [[self alloc] initWithTitle:title
-                              subtitle:nil
-                                 image:nil
-                               handler:handler
-                              itemType:EkoActionSheetItemCancel];
+    EkoActionSheetItem *item = [[self alloc] initWithTitle:title
+                                                  subtitle:nil
+                                                     image:nil
+                                                   handler:nil
+                                                  itemType:EkoActionSheetItemCancel];
+    item.cancelHandler = cancelHandler;
+    return item;
+
 }
 
-+ (instancetype)applyItemWithTitle:(nonnull NSString*)title
-                           handler:(nullable EkoActionSheetItemHandler)handler
++ (nonnull instancetype)applyItemWithTitle:(nonnull NSString*)title
+                                   handler:(nullable EkoActionSheetApplyItemHandler)applyHandler;
 {
-    return [[self alloc] initWithTitle:title
-                              subtitle:nil
-                                 image:nil
-                               handler:handler
-                              itemType:EkoActionSheetItemApply];
+    EkoActionSheetItem *item = [[self alloc] initWithTitle:title
+                                                  subtitle:nil
+                                                     image:nil
+                                                   handler:nil
+                                                  itemType:EkoActionSheetItemApply];
+    item.applyHandler = applyHandler;
+    return item;
 }
 
 

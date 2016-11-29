@@ -18,6 +18,8 @@ typedef NS_ENUM(NSUInteger, EkoActionSheetItemType)
 };
 
 typedef void(^EkoActionSheetItemHandler)(EkoActionSheetItem *_Nonnull item, UIViewController *_Nonnull actionSheetViewController);
+typedef void(^EkoActionSheetCancelItemHandler)(EkoActionSheetItem *_Nonnull item);
+typedef void(^EkoActionSheetApplyItemHandler)(EkoActionSheetItem *_Nonnull item);
 
 typedef CGFloat(^EkoActionSheetCustomCellHeightBlock)();
 typedef UITableViewCell *_Nonnull (^EkoActionSheetCustomCellConfigureBlock)(UITableViewCell *_Nonnull cell);
@@ -28,6 +30,8 @@ typedef void(^EkoActionSheetCustomCellDidSelectCellBlock)(UITableViewCell *_Nonn
 @property (nonatomic, nonnull, strong, readonly) NSString *title;
 @property (nonatomic, nullable, strong, readonly) NSString *subtitle;
 @property (nonatomic, nullable, copy) EkoActionSheetItemHandler handler;
+@property (nonatomic, nullable, copy) EkoActionSheetCancelItemHandler cancelHandler;
+@property (nonatomic, nullable, copy) EkoActionSheetApplyItemHandler applyHandler;
 @property (nonatomic, assign, readonly) EkoActionSheetItemType itemType;
 
 @property (nonatomic, nullable, strong, readonly) NSString *cellNibName;
@@ -53,10 +57,10 @@ typedef void(^EkoActionSheetCustomCellDidSelectCellBlock)(UITableViewCell *_Nonn
                               handler:(nullable EkoActionSheetItemHandler)handler;
 
 + (nonnull instancetype)cancelItemWithTitle:(nonnull NSString*)title
-                                    handler:(nullable EkoActionSheetItemHandler)handler;
+                                    handler:(nullable EkoActionSheetCancelItemHandler)cancelHandler;
 
 + (nonnull instancetype)applyItemWithTitle:(nonnull NSString*)title
-                                   handler:(nullable EkoActionSheetItemHandler)handler;
+                                   handler:(nullable EkoActionSheetApplyItemHandler)applyHandler;
 
 - (nonnull instancetype)initWithCellNibName:(nonnull NSString*)cellNibName
                              cellIdentifier:(nonnull NSString*)identifier
