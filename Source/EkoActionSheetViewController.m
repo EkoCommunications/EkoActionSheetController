@@ -20,6 +20,7 @@ static CGFloat const kEkoActionSheetTintViewAlpha = 0.5f;
 static CGFloat const kEkoActionSheetBlurViewPresentationDuration = 0.34f;
 static CGFloat const kEkoActionSheetBlurViewDismissalDuration = 0.24f;
 static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
+static CGFloat const kEkoActionSheetHeightScaleFactor = 0.6f;
 
 @interface EkoActionSheetViewController () <UIViewControllerTransitioningDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -40,6 +41,7 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
 @property (nonnull, nonatomic) NSString *actionSheetTitle;
 @property (nonnull, nonatomic) EkoActionSheetItem *cancelItem;
 @property (nonnull, nonatomic) EkoActionSheetItem *applyItem;
+@property (assign, nonatomic) CGFloat maxHeight;
 
 @end
 
@@ -74,6 +76,7 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
     vc.actionSheetTitle = title;
     vc.cancelItem = cancelItem;
     vc.applyItem = applyItem;
+    vc.maxHeight = ceilf(CGRectGetHeight(fromViewController.view.bounds) * kEkoActionSheetHeightScaleFactor);
     [fromViewController presentViewController:vc animated:YES completion:nil];
 }
 
@@ -149,7 +152,11 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
     self.headerContainerView.backgroundColor = headerColor;
     self.subHeaderView.backgroundColor = headerColor;
     
-    self.containerViewHeightConstraint.constant = [self visibleViewHeight];
+    CGFloat contentHeight = [self contentHeight];
+    CGFloat visibleHeight = MIN(contentHeight, self.maxHeight);
+    
+    self.containerViewHeightConstraint.constant = visibleHeight;
+    self.tableView.scrollEnabled = contentHeight > visibleHeight;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.titleLabel.text = self.actionSheetTitle ? self.actionSheetTitle : NSLocalizedString(@"", nil);
@@ -180,7 +187,7 @@ static CGFloat const kEkoActionSheetHeaderCornerRadius = 6.0f;
     }
 }
 
-- (CGFloat)visibleViewHeight
+- (CGFloat)contentHeight
 {
     CGFloat headerHeight = kEkoActionSheetHeaderViewHeight;
     CGFloat rowHeight = kEkoActionSheetCellHeight;
