@@ -87,7 +87,7 @@ static CGFloat const kEkoActionSheetHeightScaleFactor = 0.6f;
                           title:(nullable NSString*)title
                      cancelItem:(nullable EkoActionSheetItem*)cancelItem
 {
-    [self presentOnViewController:fromViewController items:items headerBackgroundColor:nil separatorLineColor:nil title:title cancelItem:cancelItem applyItem:nil];
+    [self presentOnViewController:fromViewController items:items headerBackgroundColor:headerBackgroundColor separatorLineColor:separatorLineColor title:title cancelItem:cancelItem applyItem:nil];
 }
 
 + (void)presentOnViewController:(nonnull UIViewController*)fromViewController
