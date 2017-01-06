@@ -11,7 +11,7 @@
 #import "EkoActionSheetDismissalTransition.h"
 #import "EkoActionSheetItem.h"
 #import "EkoActionSheetCell.h"
-@import FXBlurView;
+#import "FXBlurView.h"
 
 
 static CGFloat const kEkoActionSheetHeaderViewHeight = 50.0f;
