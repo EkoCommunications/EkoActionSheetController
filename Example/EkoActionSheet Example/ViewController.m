@@ -60,6 +60,18 @@
                                  {
                                      itemActionHandler(item.title, item.image, actionSheetViewController);
                                  }];
+    item4.cellConfigureBlock = ^UITableViewCell *(UITableViewCell *cell) {
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        return cell;
+    };
+    
+    EkoActionSheetItem *disabledItem = [EkoActionSheetItem itemWithTitle:@"Disabled"
+                                                                 handler:nil];
+    disabledItem.cellConfigureBlock = ^UITableViewCell *(UITableViewCell *cell) {
+        cell.contentView.alpha = 0.3f;
+        return cell;
+    };
+    disabledItem.disabled = YES;
     
     EkoActionSheetItem *cancelItem = [EkoActionSheetItem cancelItemWithTitle:@"Cancel"
                                                                      handler:^(EkoActionSheetItem * _Nonnull item)
@@ -87,7 +99,7 @@
                                          NSLog(@"did touch apply button");
                                      }];
     
-    NSArray<EkoActionSheetItem*> *items = @[item1, item2, item3, item4, customItem];
+    NSArray<EkoActionSheetItem*> *items = @[item1, item2, item3, item4, disabledItem, customItem];
     
     [EkoActionSheetViewController presentOnViewController:self
                                                     items:items
