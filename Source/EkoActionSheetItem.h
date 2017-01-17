@@ -29,6 +29,7 @@ typedef void(^EkoActionSheetCustomCellDidSelectCellBlock)(UITableViewCell *_Nonn
 @property (nonatomic, nullable, strong, readonly) UIImage *image;
 @property (nonatomic, nonnull, strong, readonly) NSString *title;
 @property (nonatomic, nullable, strong, readonly) NSString *subtitle;
+@property (nonatomic, assign, getter=isDisabled) BOOL disabled;
 @property (nonatomic, nullable, copy) EkoActionSheetItemHandler handler;
 @property (nonatomic, nullable, copy) EkoActionSheetCancelItemHandler cancelHandler;
 @property (nonatomic, nullable, copy) EkoActionSheetApplyItemHandler applyHandler;

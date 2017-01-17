@@ -316,8 +316,21 @@ static CGFloat const kEkoActionSheetHeightScaleFactor = 0.6f;
         // hide separator line for the last cell
         cell.separatorLineHidden = indexPath.row == self.items.count - 1;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
+        if (item.cellConfigureBlock) {
+            return item.cellConfigureBlock(cell);
+        } else {
+            return cell;
+        }
+        
     }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    EkoActionSheetItem *item = self.items[indexPath.row];
+    if (item.isDisabled) {
+        return nil;
+    }
+    return indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
